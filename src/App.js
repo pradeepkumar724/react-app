@@ -1,7 +1,7 @@
 import Home from "./Home";
-import Login from "./Login";
-import Resetpassword from "./Resetpassword";
-import Signup from "./Signup";
+import Login from "./Auth/Login";
+import Signup from "./Auth/Signup";
+import Resetpassword from "./Auth/Resetpassword";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

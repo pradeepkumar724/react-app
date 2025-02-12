@@ -1,4 +1,6 @@
 import { useState } from "react";
+import emailValidationss from "../Utils/emailValidationss";
+
 
 function Signup() {
 
@@ -8,6 +10,18 @@ function Signup() {
   var [email,setEmail] = useState("");
   var [mobile,setMobile] = useState("");
   var [password,setPassword] = useState("");
+
+
+  // Validation Errors Variables
+
+  var[nameError,setNameError] = useState("");
+  var [emailError,setEmailError] = useState("");
+  var [mobileError,setMobileError] = useState("");
+  var [passWordError,setPasswordError] = useState("");
+
+  // Api Validation
+  
+  var noOfError = 0;
 
 
   function handleChangeName(event){
@@ -27,7 +41,53 @@ function Signup() {
   }
 
   function handleCreateAccount(){
-    console.log(name + " - " +  email + " - " + mobile + " - " +  password)
+
+    // For Name Validation
+    if(name.length>=3){
+      setNameError("")
+    }else{
+      setNameError("Name should be Min 3 Char");
+      noOfError++;
+    }
+
+    // For Email validation
+    if(emailValidationss(email) ){
+      setEmailError("");
+    }else{
+      setEmailError("Enter Vaild Email Id");
+      noOfError++;
+
+    }
+
+    // For Mobile Validation
+
+    if(mobile.length === 10){
+      setMobileError("")
+    }else{
+      setMobileError("Enter Valid Mobile Number");
+      noOfError++;
+
+    }
+
+    // For Password Validation
+
+    if(password.length >=8){
+      setPasswordError("");
+    }else{
+      setPasswordError("Password Must be 8 Char");
+      noOfError++;
+    }
+
+    // API Handling
+
+    if(noOfError === 0){
+      console.log("API Calling");
+    }else{
+      console.log("Signup Error");
+    }
+
+
+    // console.log(name + " - " +  email + " - " + mobile + " - " +  password)
   }
 
   return (
@@ -46,6 +106,9 @@ function Signup() {
               id="signupName"
               onChange = {event => handleChangeName(event)}
             />
+            <div className="mt-1">
+              <p className="text-danger fw-medium fs-6">{nameError}</p>
+            </div>
           </div>
           <div className="mb-4">
             <label for="signupemail" className="mb-2 text-primary fw-medium">
@@ -58,6 +121,9 @@ function Signup() {
               id="signupemail"
               onChange={event => handleChangeEmail(event) }
             />
+            <div className="mt-2">
+              <p className="text-danger fw-medium fs-6">{emailError}</p>
+            </div>
           </div>
           <div className="mb-4">
             <label for="signuppassword" className="mb-2 text-primary fw-medium">
@@ -70,6 +136,9 @@ function Signup() {
               id="signupnumber"
               onChange={event => handleChangeMobile(event)}
             />
+            <div className="mt-2">
+              <p className="text-danger fw-medium fs-6">{mobileError}</p>
+            </div>
           </div>
           <div className="mb-4">
             <label for="signuppassword" className="mb-2 text-primary fw-medium">
@@ -82,6 +151,9 @@ function Signup() {
               id="signuppassword"
               onChange={event => handleChangePword(event)}
             />
+            <div className="mt-2">
+              <p className="text-danger fw-medium fs-6">{passWordError}</p>
+            </div>
           </div>
           <button className="btn btn-primary mb-2" onClick={event => handleCreateAccount()}>Create Account</button>
           <br/>
