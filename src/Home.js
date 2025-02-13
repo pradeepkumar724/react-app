@@ -31,8 +31,8 @@ function Home() {
               </a>
             </div>
           </div>
-          <div className="col-6 mt-4 text-primary">
-            <h4>WelCome To Vashista 360 - Spoken English Course</h4>
+          <div className="col-12 mt-4 text-primary">
+            <h4 className="text-center">WelCome To Vashista 360 - Spoken English Course</h4>
             {loginUserId !== null && <div className="mt-4"><button className="btn btn-danger fw-semibold" onClick={event => handleLogout()}>Log out</button></div>}
             {loginUserId === null && <div className="mt-4"><a href="/login"><button className="btn btn-primary mr-4">Login</button></a> <a href="/signup"><button className="btn btn-primary mr-4">Signup</button></a></div>}
           </div>
