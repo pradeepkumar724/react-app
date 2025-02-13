@@ -1,59 +1,85 @@
 import { useState } from "react";
-import emailValidationss from '../Utils/emailValidationss'
+import emailValidationss from "../Utils/emailValidationss";
+import axios from "axios";
 
 function Login() {
-
   var noOfError = 0;
 
   // Use State Variables
 
-  var [emailLogin,setEmailLogin] = useState("");
-  var [passwordLogin,setPasswordLogin] = useState("");
-
+  var [emailLogin, setEmailLogin] = useState("");
+  var [passwordLogin, setPasswordLogin] = useState("");
 
   // Validation Variables
 
-  var [emailLoginError,setemailLoginError] = useState("");
+  var [emailLoginError, setemailLoginError] = useState("");
   var [passwordLoginError, setpasswordLoginError] = useState("");
 
+  // Login Errors
 
-  function handlerChangeName(event){
+  var [loginErrorMsg, setLoginErrorMsg] = useState("");
+  var [loginSuccessMsg, setLoginSuccessMsg] = useState("");
+
+  function handlerChangeName(event) {
     setEmailLogin(event.target.value);
   }
 
-  function handlerChangeEmail(event){
+  function handlerChangeEmail(event) {
     setPasswordLogin(event.target.value);
   }
 
-
-  function handlerLoginClick(){
-
+  async function handlerLoginClick() {
     // Email validation
 
-    if(emailValidationss(emailLogin)){
+    if (emailValidationss(emailLogin)) {
       setemailLoginError("");
-    }else{
+    } else {
       setemailLoginError("Enter valid Email");
       noOfError++;
     }
 
     // Password validation
 
-    if(passwordLogin.length>=8){
+    if (passwordLogin.length >= 8) {
       setpasswordLoginError("");
-    }else{
+    } else {
       setpasswordLoginError("Enter Valid Password");
       noOfError++;
     }
 
-    if(noOfError === 0){
-      console.log("Your in Login")
+    if (noOfError === 0) {
+      console.log("Your in Login");
     }
 
+    var apiUserInputs = {
+      email: emailLogin,
+      password: passwordLogin,
+    };
 
+    try {
+      var loginApiResponse = await axios.post(
+        " https://api.softwareschool.co/auth/login",
+        apiUserInputs
+      );
+      console.log(loginApiResponse.data.result);
+
+      if (loginApiResponse.data.result === "SUCCESS") {
+        // console.log(loginApiResponse)
+        // console.log(loginApiResponse.data.data.userId        );
+        localStorage.setItem("loginUserId", loginApiResponse.data.data.userId);
+        setLoginSuccessMsg(loginApiResponse.data.message);
+        setLoginErrorMsg("");
+        window.location = "/"
+      } else {
+        setLoginErrorMsg(loginApiResponse.data.message);
+        setLoginSuccessMsg("");
+      }
+    } catch (error) {
+      console.log(error.message);
+      setLoginErrorMsg(error.message);
+      setLoginSuccessMsg("");
+    }
   }
-
-
 
   return (
     <div className="container">
@@ -69,7 +95,7 @@ function Login() {
               placeholder="Your Email"
               className="form-control"
               id="logintext"
-              onChange={event => handlerChangeName(event)}
+              onChange={(event) => handlerChangeName(event)}
             />
             <div className="mb-2">
               <p className="text-danger fw-medium fs-6">{emailLoginError}</p>
@@ -84,16 +110,29 @@ function Login() {
               placeholder="Password"
               className="form-control"
               id="loginpassword"
-              onChange={event => handlerChangeEmail(event)}
+              onChange={(event) => handlerChangeEmail(event)}
             />
             <div className="mb-2">
               <p className="text-danger fw-medium fs-6">{passwordLoginError}</p>
             </div>
           </div>
-          <button className="btn btn-primary mt-4" onClick={event => handlerLoginClick()}> Login </button>
-
-          <br/>{emailLogin} <br/>{passwordLogin}<br/>
-
+          <button
+            className="btn btn-primary mb-4"
+            onClick={(event) => handlerLoginClick()}
+          >
+            {" "}
+            Login{" "}
+          </button>
+          <div className="mb-2">
+            <p className="alert alert-danger">{loginErrorMsg}</p>
+          </div>
+          <div className="mb-4">
+            <p className="alert alert-success">{loginSuccessMsg}</p>
+          </div>
+          <br />
+          {emailLogin} <br />
+          {passwordLogin}
+          <br />
           <div className="d-flex flex-column mt-3">
             <a href="/" className="text-decoration-none">
               Home
