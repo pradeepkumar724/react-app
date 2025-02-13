@@ -56,6 +56,42 @@ function Login() {
       password: passwordLogin,
     };
 
+    // API Calling By Using Fetch Method
+
+    // var apiInputdataFetch = {
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   method: "POST",
+    //   body: JSON.stringify(apiUserInputs),
+    // };
+
+    // try{
+    //   var fetchUserData = await fetch(
+    //     "https://api.softwareschool.co/auth/login",
+    //     apiInputdataFetch
+    //   );
+    //   console.log(fetchUserData);
+    //   if (fetchUserData.ok === true) {
+    //     var finalData = await fetchUserData.json();
+    //     console.log(finalData);
+    //     if (finalData.result === "SUCCESS" ){
+    //       console.log(finalData.data.userId);
+    //       localStorage.setItem("loginUserId", finalData.data.userId);
+    //       window.location = '/'
+    //       setLoginSuccessMsg(finalData.message);
+    //       setLoginErrorMsg("");
+    //     }else{
+    //       setLoginErrorMsg(finalData.message);
+    //       setLoginSuccessMsg('');
+    //     }
+    //   }
+    // }catch(error){
+    //   setLoginErrorMsg(error.message);
+    //   setLoginSuccessMsg("")
+    // }
+   
+
     try {
       var loginApiResponse = await axios.post(
         " https://api.softwareschool.co/auth/login",
