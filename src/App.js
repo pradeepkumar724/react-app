@@ -5,6 +5,7 @@ import Resetpassword from "./Auth/Resetpassword";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Address from "./Address";
 import HomeOne from "./HomeOne";
+import ProductsList from "./ProductsList";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" Component={Home} />
             <Route path="/user-address" Component={Address}/>
             <Route path="/home" Component={HomeOne}/>
+            <Route path="/products-list" Component={ProductsList}/>
           </Routes>
         </BrowserRouter>
       </header>
