@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Address from "./Address";
 import HomeOne from "./HomeOne";
 import ProductsList from "./ProductsList";
+import ParentComponent from "./Dummy/ParentComponent";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/user-address" Component={Address}/>
             <Route path="/home" Component={HomeOne}/>
             <Route path="/products-list" Component={ProductsList}/>
+            <Route path="/dummy-post" Component={ParentComponent}/>
           </Routes>
         </BrowserRouter>
       </header>
