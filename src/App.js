@@ -7,6 +7,7 @@ import Address from "./Address";
 import HomeOne from "./HomeOne";
 import ProductsList from "./ProductsList";
 import ParentComponent from "./Dummy/ParentComponent";
+import UsersList from "./Users/UsersList";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/home" Component={HomeOne}/>
             <Route path="/products-list" Component={ProductsList}/>
             <Route path="/dummy-post" Component={ParentComponent}/>
+            <Route path="/manage-users" Component={UsersList}/>
           </Routes>
         </BrowserRouter>
       </header>
