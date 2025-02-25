@@ -1,4 +1,10 @@
+// import { useState } from "react";
+import { useSelector } from "react-redux";
+
 function Home() {
+
+  // let [counter,setCounter] = useState(0); 
+
   var loginUserId = localStorage.getItem("loginUserId");
   console.log(loginUserId);
 
@@ -7,6 +13,16 @@ function Home() {
     // console.log(localStorage.getItem("loginUserId"))
     window.location.reload();
   }
+
+  // function incrementHandler(){
+  //   setCounter(counter+1);
+  // }
+
+  // function decrementHandler(){
+  //   setCounter(counter-1);
+  // }
+
+  let counter = useSelector(state => state.counter); 
 
   return (
     <div className="container">
@@ -36,6 +52,11 @@ function Home() {
             {loginUserId !== null && <div className="mt-4"><button className="btn btn-danger fw-semibold" onClick={event => handleLogout()}>Log out</button></div>}
             {loginUserId === null && <div className="mt-4"><a href="/login"><button className="btn btn-primary mr-4">Login</button></a> <a href="/signup"><button className="btn btn-primary mr-4">Signup</button></a></div>}
           </div>
+        </div>
+        <div className="bg-light mt-3 rounded p-5 text-center">
+        <h2 className="mb-5">Counter : {counter}</h2>
+        <button className="btn btn-success me-3" >Increment</button>
+        <button className="btn btn-danger" >Decrement</button>
         </div>
       </div>
     </div>

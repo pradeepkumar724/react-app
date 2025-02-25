@@ -8,11 +8,14 @@ import HomeOne from "./HomeOne";
 import ProductsList from "./ProductsList";
 import ParentComponent from "./Dummy/ParentComponent";
 import UsersList from "./Users/UsersList";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Provider store={store}>
         <BrowserRouter>
           <Routes>
             <Route path="/signup" Component={Signup} />
@@ -26,6 +29,7 @@ function App() {
             <Route path="/manage-users" Component={UsersList}/>
           </Routes>
         </BrowserRouter>
+        </Provider>
       </header>
     </div>
   );
