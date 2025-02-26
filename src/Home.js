@@ -1,9 +1,13 @@
 // import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "./store/counter";
 
 function Home() {
 
-  // let [counter,setCounter] = useState(0); 
+  // let [counter,setCounter] = useState(0);
+
+
+
 
   var loginUserId = localStorage.getItem("loginUserId");
   console.log(loginUserId);
@@ -23,6 +27,17 @@ function Home() {
   // }
 
   let counter = useSelector(state => state.counter); 
+
+let dispatch =   useDispatch()
+
+function incrementHandler(){
+dispatch(increment(""))
+}
+
+function decrementHandler(){
+dispatch(decrement(""))
+}
+
 
   return (
     <div className="container">
@@ -55,8 +70,8 @@ function Home() {
         </div>
         <div className="bg-light mt-3 rounded p-5 text-center">
         <h2 className="mb-5">Counter : {counter}</h2>
-        <button className="btn btn-success me-3" >Increment</button>
-        <button className="btn btn-danger" >Decrement</button>
+        <button className="btn btn-success me-3" onClick={event => incrementHandler()}>Increment</button>
+        <button className="btn btn-danger" onClick={event => decrementHandler()} >Decrement</button>
         </div>
       </div>
     </div>
